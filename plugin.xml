@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+           id="com.symbol.datawedge"
+      version="0.1.0">
+    <name>Symbol DataWedge Plugin</name>
+
+
+    <js-module src="www/datawedge.js" name="SymbolDataWedge">
+        <clobbers target="datawedge" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="SymbolDataWedge" >
+                <param name="android-package" value="com.symbol.datawedge.plugin.SymbolDataWedgePlugin"/>
+            </feature>
+        </config-file>
+         <config-file target="AndroidManifest.xml" parent="/*/application/activity">
+           <intent-filter>
+                <action android:name="com.symbol.datawedge.ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </config-file>
+        <source-file src="lib/android/com/symbol/datawedge/BarcodeScan.java" target-dir="src/com/symbol/datawedge" />
+        <source-file src="lib/android/com/symbol/datawedge/ScanCallback.java" target-dir="src/com/symbol/datawedge" />
+        <source-file src="lib/android/com/symbol/datawedge/DataWedgeIntentHandler.java" target-dir="src/com/symbol/datawedge" />
+        <source-file src="src/android/com/symbol/datawedge/plugin/SymbolDataWedgePlugin.java" target-dir="src/com/symbol/datawedge/plugin" />
+    </platform>
+
+</plugin>
+
+
