@@ -26,7 +26,7 @@ import com.symbol.datawedge.BarcodeScan;
 import com.symbol.datawedge.DataWedgeIntentHandler;
 import com.symbol.datawedge.ScanCallback;
 
-public class SymbolDatawedgePlugin extends CordovaPlugin {
+public class SymbolDataWedgePlugin extends CordovaPlugin {
     
     private DataWedgeIntentHandler wedge;
     protected static String TAG = "SymbolDatawedgePlugin";
