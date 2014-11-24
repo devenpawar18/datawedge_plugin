@@ -61,22 +61,6 @@ DataWedge.prototype.unregisterBarcode = function () {
 };
 
 /**
- * Register a callback for magstripe reads
- */
-DataWedge.prototype.registerForMagstripe = function (callback) {
-    
-    exec(callback, null, 'SymbolDataWedge', 'magstripe.register', []);
-};
-
-/**
- * De-register a callback for magstripe events.  
- */
-DataWedge.prototype.unregisterMagstripe = function () {
-    
-    exec(null, null, 'SymbolDataWedge', 'magstripe.unregister', []);
-};
-
-/**
  * Manually turn on barcode scanner
  */
 DataWedge.prototype.startScanner = function () {

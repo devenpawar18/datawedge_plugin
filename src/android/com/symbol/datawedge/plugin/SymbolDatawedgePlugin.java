@@ -1,32 +1,22 @@
 package com.symbol.datawedge.plugin;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.util.Log;
-
-
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import android.content.Intent;
+import android.util.Log;
 
 import com.symbol.datawedge.BarcodeScan;
 import com.symbol.datawedge.DataWedgeIntentHandler;
 import com.symbol.datawedge.ScanCallback;
 
-public class SymbolDatawedgePlugin extends CordovaPlugin {
+public class SymbolDataWedgePlugin extends CordovaPlugin {
     
     private DataWedgeIntentHandler wedge;
     protected static String TAG = "SymbolDatawedgePlugin";
@@ -74,27 +64,6 @@ public class SymbolDatawedgePlugin extends CordovaPlugin {
             callbackContext.success();
         }
 
-        //register for magstripe callbacks
-        else if ("magstripe.register".equals(action)){
-             wedge.setMagstripeReadCallback(new ScanCallback<List<String>>() {
-                @Override
-                public void execute(List<String> result) {
-                    Log.i(TAG, "Magstripe result [" + result + "].");
-                    JSONArray tracks = new JSONArray(result);
-                    //send plugin result
-                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, tracks);
-                    pluginResult.setKeepCallback(true);
-                    callbackContext.sendPluginResult(pluginResult);
-                }
-            });
-        }
-        else if("magstripe.unregister".equals(action)) {
-            wedge.setMagstripeReadCallback(null);
-            if (!wedge.hasListeners()) {
-                wedge.stop();
-            }
-        }
-
         //register for plugin callbacks
         else if ("switchProfile".equals(action)){
             wedge.switchProfile(args.getString(0));
@@ -106,7 +75,7 @@ public class SymbolDatawedgePlugin extends CordovaPlugin {
 
 
         //start plugin now if not already started
-        if ("start".equals(action) || "magstripe.register".equals(action) || "scanner.register".equals(action)) {
+        if ("start".equals(action) || "scanner.register".equals(action)) {
 
             //try to read intent action from inbound params
             String intentAction = null;
